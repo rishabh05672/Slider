@@ -16,18 +16,21 @@ class Slider extends StatefulWidget {
     this.onMinChange,
     this.onMaxChange,
   });
+
   final double? width;
   final double? height;
   final int? initMin;
   final int? initmax;
   final Future Function(int? min)? onMinChange;
   final Future Function(int? max)? onMaxChange;
+
   @override
   State<Slider> createState() => _SliderState();
 }
 
 class _SliderState extends State<Slider> {
   late RangeValues _rangeValues;
+
   @override
   void initState() {
     super.initState();
@@ -60,13 +63,15 @@ class _SliderState extends State<Slider> {
             });
           },
           onChangeEnd: (RangeValues newValues) async {
-            // Handle callbacks for min and max value changes.
-            if (newValues.start != _rangeValues.start &&
-                widget.onMinChange != null) {
+            // Update the range values and invoke the callbacks.
+            setState(() {
+              _rangeValues = newValues;
+            });
+
+            if (widget.onMinChange != null) {
               await widget.onMinChange!(newValues.start.toInt());
             }
-            if (newValues.end != _rangeValues.end &&
-                widget.onMaxChange != null) {
+            if (widget.onMaxChange != null) {
               await widget.onMaxChange!(newValues.end.toInt());
             }
           },

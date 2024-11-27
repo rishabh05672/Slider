@@ -114,10 +114,10 @@ class _HomePageWidgetState extends State<HomePageWidget> {
               ),
               SizedBox(
                 width: double.infinity,
-                height: 100.0,
+                height: 50.0,
                 child: custom_widgets.Slider(
                   width: double.infinity,
-                  height: 100.0,
+                  height: 50.0,
                   initMin: _model.min,
                   initmax: _model.max,
                   onMinChange: (min) async {
